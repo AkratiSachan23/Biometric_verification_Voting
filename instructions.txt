@@ -1,0 +1,58 @@
+'''pip install flask opencv-python face-recognition numpy pymongo'''
+--------------------------------------------------------------------------------------------------------------------------------------
+Step: You need MongoDB to store face embeddings.
+
+🛠 Create MongoDB Collection for Face Data
+
+1. Install MongoDB and start the server.
+2. Open the MongoDB shell and create a database:
+
+'''use voterDB
+db.voters.insertOne({ voter_id: "12345", face_encoding: [] })'''
+
+3. Your face embeddings will be stored in voterDB.voters collection.
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Step: Test the API
+Use Postman or cURL to send a test request:
+
+Request:
+```
+curl -X POST http://127.0.0.1:5002/verify -H "Content-Type: application/json" -d '{"voter_id": "12345"}'
+
+'''
+Possible Responses:
+
+✅ Success
+
+json
+{
+    "message": "✅ Verification successful!",
+    "voter_id": "12345",
+    "match_confidence": 0.93
+}
+
+❌ Face Mismatch
+
+json
+{
+    "message": "❌ Face mismatch!",
+    "match_confidence": 0.42
+}
+
+⚠ Voter Not Found
+
+json
+{
+    "error": "Voter not found"
+}
+
+⚠ No Face Detected
+
+json
+{
+    "error": "No face detected in live image"
+}
+
+-----------------------------------------------------------------------------------------------------------------------

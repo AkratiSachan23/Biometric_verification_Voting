@@ -1,0 +1,10 @@
+flask
+google-cloud-vision
+google-cloud-storage
+opencv-python
+numpy
+pillow
+cmake
+dlib
+face_recognition
+
